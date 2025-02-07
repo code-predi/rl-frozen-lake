@@ -16,7 +16,7 @@ else:
     print("CUDA not available")
 
 # Action: 0=left, 1=down, 2=right, 3=up
-# Reward: 1 if reaches the gift or -0.1 for anything else
+# Reward: 1 if reaches the gift or step*0.001 for anything else
 
 def run(episodes, is_training=True, render=False, is_slippery=False):
     env = gym.make('FrozenLake-v1', map_name='8x8', is_slippery=is_slippery, render_mode='human' if render else None)
