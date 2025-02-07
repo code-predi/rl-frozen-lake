@@ -32,7 +32,7 @@ def run(episodes, is_training=True, render=False, is_slippery=False):
         
 
     learning_rate_a = 0.9           # alpha or learning rate 
-    discount_factor_g = 0.7         # gamma or discount rate. Near 0: more weight/reward placed on immediate state. Near 1: more on future state
+    discount_factor_g = 0.9         # gamma or discount rate. Near 0: more weight/reward placed on immediate state. Near 1: more on future state
     epsilon = 1                      # 1 = 100% random action
     epsilon_decay_rate = 0.0001     # epsilon decay rate. 1/0.0001 = 10,000. i:e. it will take 10,000 steps to reduce epsilon to 0
 
@@ -68,7 +68,7 @@ def run(episodes, is_training=True, render=False, is_slippery=False):
             learning_rate_a = 0.0001    # We do this to minimize the effect of further training after 
                                         #the epsilon has reached 0 and, to prevent overfitting
         
-        rewards_per_episode[i] = 10 if reward == 1 else -0.1
+        rewards_per_episode[i] = reward if reward == 1 else i*0.001
     
     env.close()
 
@@ -84,4 +84,4 @@ def run(episodes, is_training=True, render=False, is_slippery=False):
         f.close()
 
 if __name__ == "__main__": 
-    run(episodes=10000, is_training=True, render=False, is_slippery=False)
+    run(episodes=1500, is_training=True, render=False, is_slippery=True)
