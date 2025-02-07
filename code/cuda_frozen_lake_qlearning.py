@@ -16,7 +16,7 @@ else:
     print("CUDA not available")
 
 # Action: 0=left, 1=down, 2=right, 3=up
-# Reward: 1 if reaches the gift or step*0.001 for anything else
+# Reward: 1 if reaches the gift or nothing
 
 def run(episodes, is_training=True, render=False, is_slippery=False):
     env = gym.make('FrozenLake-v1', map_name='8x8', is_slippery=is_slippery, render_mode='human' if render else None)
@@ -68,7 +68,7 @@ def run(episodes, is_training=True, render=False, is_slippery=False):
             learning_rate_a = 0.0001    # We do this to minimize the effect of further training after 
                                         #the epsilon has reached 0 and, to prevent overfitting
         
-        rewards_per_episode[i] = reward if reward == 1 else i*0.001
+        rewards_per_episode[i] = reward
     
     env.close()
 
@@ -84,4 +84,4 @@ def run(episodes, is_training=True, render=False, is_slippery=False):
         f.close()
 
 if __name__ == "__main__": 
-    run(episodes=1500, is_training=True, render=False, is_slippery=True)
+    run(episodes=1000, is_training=False, render=True, is_slippery=False)
